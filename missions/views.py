@@ -17,7 +17,7 @@ class MissionViewSet(viewsets.ModelViewSet):
         if mission.cat:
             return Response(
                 "You can't delete mission already assigned to a cat!",
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         return super().destroy(request, *args, **kwargs)
@@ -27,9 +27,7 @@ class MissionViewSet(viewsets.ModelViewSet):
         mission = self.get_object()
         cat_id = request.data.get("cat_id")
 
-        if Mission.objects.filter(
-                Q(cat_id=cat_id) & Q(is_complete=False)
-        ).exists():
+        if Mission.objects.filter(Q(cat_id=cat_id) & Q(is_complete=False)).exists():
             return Response(
                 "Cat already has a mission", status=status.HTTP_400_BAD_REQUEST
             )
@@ -48,14 +46,13 @@ class MissionViewSet(viewsets.ModelViewSet):
             target = mission.targets.get(id=target_id)
         except Target.DoesNotExist:
             return Response(
-                {"error": "Target not found"},
-                status=status.HTTP_404_NOT_FOUND
+                {"error": "Target not found"}, status=status.HTTP_404_NOT_FOUND
             )
 
         if mission.is_complete or target.is_complete:
             return Response(
                 "You can't update notes when mission or target is complete",
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         target.notes = notes
@@ -71,7 +68,7 @@ class MissionViewSet(viewsets.ModelViewSet):
         if not target or not target.is_complete:
             return Response(
                 {"error": "Target must be completed before mission closure"},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         mission.is_complete = True

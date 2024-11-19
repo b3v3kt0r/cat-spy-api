@@ -9,8 +9,7 @@ class BreedValidationService:
     def validate_breed(breed):
         try:
             response = requests.get(
-                "https://api.thecatapi.com/v1/breeds/search",
-                params={"q": breed}
+                "https://api.thecatapi.com/v1/breeds/search", params={"q": breed}
             )
             return len(response.json()) > 0
         except Exception:
