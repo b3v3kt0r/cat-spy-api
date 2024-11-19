@@ -9,10 +9,6 @@ class Mission(models.Model):
     is_complete = models.BooleanField(default=False)
     targets = models.ManyToManyField("Target", related_name="missions", blank=True)
 
-    def clean(self):
-        if self.targets.count() > 3:
-            raise ValidationError("A mission can have a maximum of 3 targets.")
-
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
