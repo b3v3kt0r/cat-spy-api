@@ -11,7 +11,7 @@ class Mission(models.Model):
         ("COMPLETED", "Completed"),
     )
 
-    cats = models.ForeignKey(Cat, on_delete=models.SET_NULL, null=True, related_name="missions")
+    cat = models.ForeignKey(Cat, on_delete=models.SET_NULL, null=True, related_name="missions")
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="PENDING")
     targets = models.ManyToManyField("Target", related_name="missions", blank=True)
 
