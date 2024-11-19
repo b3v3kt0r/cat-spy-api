@@ -45,7 +45,7 @@ class MissionViewSet(viewsets.ModelViewSet):
         target_id = request.data.get("target_id")
 
         try:
-            target = Target.objects.get(id=target_id, mission=mission)
+            target = mission.targets.get(id=target_id)
         except Target.DoesNotExist:
             return Response(
                 {"error": "Target not found"},
@@ -66,7 +66,8 @@ class MissionViewSet(viewsets.ModelViewSet):
     def complete_mission(self, request, pk=None):
         mission = self.get_object()
 
-        target = mission.targets
+        target = mission.targets.first()
+
         if not target or not target.is_complete:
             return Response(
                 {"error": "Target must be completed before mission closure"},
@@ -76,6 +77,4 @@ class MissionViewSet(viewsets.ModelViewSet):
         mission.is_complete = True
         mission.save()
 
-        return Response(
-            self.get_serializer(mission).data
-        )
+        return Response(self.get_serializer(mission).data)
