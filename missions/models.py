@@ -11,12 +11,9 @@ class Mission(models.Model):
         ("COMPLETED", "Completed"),
     )
 
-    name = models.CharField(max_length=100)
     cats = models.ForeignKey(Cat, on_delete=models.SET_NULL, null=True, related_name="missions")
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="PENDING")
     targets = models.ManyToManyField("Target", related_name="missions", blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def clean(self):
         if self.targets.count() > 3:
