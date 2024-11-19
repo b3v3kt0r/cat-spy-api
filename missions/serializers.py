@@ -15,3 +15,18 @@ class MissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mission
         fields = ["id", "cat", "is_complete", "targets"]
+
+    def validate_targets(self, targets):
+        if len(targets) < 1 or len(targets) > 3:
+            raise serializers.ValidationError("A mission must have 1-3 targets")
+        return targets
+
+    def create(self, validated_data):
+        targets_data = validated_data.pop("targets")
+        mission = Mission.objects.create(**validated_data)
+
+        for target_data in targets_data:
+            target = Target.objects.create(**target_data)
+            mission.targets.add(target)
+
+        return mission
