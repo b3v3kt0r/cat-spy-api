@@ -5,14 +5,8 @@ from cats.models import Cat
 
 
 class Mission(models.Model):
-    STATUS_CHOICES = (
-        ("PENDING", "Pending"),
-        ("IN_PROGRESS", "In Progress"),
-        ("COMPLETED", "Completed"),
-    )
-
     cat = models.ForeignKey(Cat, on_delete=models.SET_NULL, null=True, related_name="missions")
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="PENDING")
+    is_complete = models.BooleanField(default=False)
     targets = models.ManyToManyField("Target", related_name="missions", blank=True)
 
     def clean(self):
@@ -28,4 +22,4 @@ class Target(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     notes = models.TextField()
-    status = models.CharField(max_length=100)
+    is_complete = models.BooleanField(default=False)
