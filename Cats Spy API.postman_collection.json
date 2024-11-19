@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "21c044fc-6991-49da-9bee-59d1d12cd675",
+		"name": "Cats Spy API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37212618"
+	},
+	"item": [
+		{
+			"name": "mission_targets",
+			"item": [
+				{
+					"name": "get all missions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/missions/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one mission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/missions/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create mission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cat\": \"<int>\",\r\n  \"is_complete\": false,\r\n  \"targets\": [\r\n    {\r\n      \"name\": \"<string>\",\r\n      \"country\": \"<string>\",\r\n      \"notes\": \"<string>\",\r\n      \"is_complete\": false\r\n    },\r\n    {\r\n      \"name\": \"<string>\",\r\n      \"country\": \"<string>\",\r\n      \"notes\": \"<string>\",\r\n      \"is_complete\": false\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/missions/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update notes",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"target_id\": \"<integer>\",\r\n  \"notes\": \"<string>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/missions/{id}/update_notes",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								"{id}",
+								"update_notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "complete mission",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/missions/{id}/complete_mission",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								"{id}",
+								"complete_mission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign cat",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cat_id\": \"<int>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/missions/{id}/assign_cat",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								"{id}",
+								"assign_cat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete mission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/missions/{id}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"missions",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cats",
+			"item": [
+				{
+					"name": "get all cats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get one cat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/cats/{id}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cats",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create cat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"<string>\",\r\n  \"years_of_experience\": \"<string>\",\r\n  \"breed\": \"<string>\",\r\n  \"salary\": \"<string>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/cats/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cats",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update cat's salary",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"salary\": 1100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/cats/{id}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cats",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete cat",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/cats/{id}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cats",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
