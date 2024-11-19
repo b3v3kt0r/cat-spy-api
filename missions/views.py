@@ -61,3 +61,21 @@ class MissionViewSet(viewsets.ModelViewSet):
         target.notes = notes
         target.save()
         return Response(status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["PATCH"])
+    def complete_mission(self, request, pk=None):
+        mission = self.get_object()
+
+        target = mission.targets
+        if not target or not target.is_complete:
+            return Response(
+                {"error": "Target must be completed before mission closure"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        mission.is_complete = True
+        mission.save()
+
+        return Response(
+            self.get_serializer(mission).data
+        )
